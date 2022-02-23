@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 
 int main() {
     FILE* f = fopen("in.txt", "r");
@@ -14,9 +15,22 @@ int main() {
     }
     fclose(f);
 
-    char my_str[128];
+    char my_str[128];    
     printf("Introdu sirul: ");
-    scanf("%s", my_str);
+    fgets(my_str, 128, stdin);
+
+    char* cuv = strtok(my_str, " ");
+    char* cuvinte[128];
+    int nr_cuv = 0;
+    while (cuv != NULL) {        
+        cuvinte[nr_cuv] = cuv;
+        nr_cuv++;
+        cuv = strtok(NULL, " ");        
+    }
+
+    for (int i = 0; i < nr_cuv; ++i) {
+        printf("%s\n", cuvinte[i]);
+    }
 
     return 0;
 }
